@@ -35,9 +35,9 @@ class BSOD : JFrame() {
 
 		val fileName = if (os.contains("win")) {
 			if (version.startsWith("6.1") || version.startsWith("6.0")) {
-				"/10.png"
-			} else if (version.startsWith("6.") || version.startsWith("10.")) {
 				"/7.png"
+			} else if (version.startsWith("6.") || version.startsWith("10.")) {
+				"/10.png"
 			} else {
 				null
 			}
