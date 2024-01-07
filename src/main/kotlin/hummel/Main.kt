@@ -8,18 +8,10 @@ import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 import javax.swing.JFrame
 import javax.swing.JLabel
-import javax.swing.UIManager
-
 
 fun main() {
 	EventQueue.invokeLater {
 		try {
-			for (info in UIManager.getInstalledLookAndFeels()) {
-				if ("Windows Classic" == info.name) {
-					UIManager.setLookAndFeel(info.className)
-					break
-				}
-			}
 			val frame = BSOD()
 			frame.isVisible = true
 		} catch (e: Exception) {
