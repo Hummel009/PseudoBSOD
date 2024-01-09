@@ -35,7 +35,6 @@ class BSOD : JFrame() {
 
 		val fontSize = round(screenWidth.toDouble() * 39.0 / 1920.0).toInt()
 		textArea.font = Font("Lucida Console", Font.TRUETYPE_FONT, fontSize)
-		println("$screenWidth, ${textArea.font.size2D}, ${textArea.font.size}")
 		textArea.foreground = Color.WHITE
 		textArea.background = Color(0, 0, 130)
 		textArea.lineWrap = true
