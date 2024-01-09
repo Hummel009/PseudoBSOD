@@ -1,13 +1,10 @@
 package hummel
 
-import java.awt.EventQueue
-import java.awt.Image
-import java.awt.Toolkit
-import java.util.*
-import javax.imageio.ImageIO
-import javax.swing.ImageIcon
+import java.awt.*
 import javax.swing.JFrame
-import javax.swing.JLabel
+import javax.swing.JTextArea
+import javax.swing.text.Highlighter
+import kotlin.math.round
 
 fun main() {
 	EventQueue.invokeLater {
@@ -22,35 +19,61 @@ fun main() {
 
 class BSOD : JFrame() {
 	init {
-		val os = System.getProperty("os.name").lowercase(Locale.getDefault())
-		val version = System.getProperty("os.version")
+		val screenSize = Toolkit.getDefaultToolkit().screenSize
+		val screenWidth = screenSize.width
 
-		val fileName = if (os.contains("win")) {
-			if (version.startsWith("6.1") || version.startsWith("6.0")) {
-				"/7.png"
-			} else if (version.startsWith("6.") || version.startsWith("10.")) {
-				"/10.png"
-			} else {
-				null
-			}
-		} else {
-			null
+		defaultCloseOperation = DO_NOTHING_ON_CLOSE
+		isResizable = false
+		isUndecorated = true
+		isAlwaysOnTop = true
+		size = screenSize
+
+		val textArea = object : JTextArea(win7String) {
+			override fun getHighlighter(): Highlighter? = null
+			override fun getCaretColor(): Color = Color(0, 0, 130)
 		}
-		fileName?.let {
-			val imageStream = BSOD::class.java.getResourceAsStream(fileName)
-			defaultCloseOperation = DO_NOTHING_ON_CLOSE
-			isResizable = false
-			isUndecorated = true
-			isAlwaysOnTop = true
-			size = Toolkit.getDefaultToolkit().screenSize
-			val originalImage = ImageIO.read(imageStream)
-			val screenSize = Toolkit.getDefaultToolkit().screenSize
-			val scaledImage = originalImage.getScaledInstance(screenSize.width, screenSize.height, Image.SCALE_SMOOTH)
-			val imageIcon = ImageIcon(scaledImage)
-			val imageLabel = JLabel(imageIcon)
-			imageLabel.setBounds(0, 0, width, height)
-			add(imageLabel)
-			setLocationRelativeTo(null)
-		}
+
+		val fontSize = round(screenWidth.toDouble() * 39.0 / 1920.0).toInt()
+		textArea.font = Font("Lucida Console", Font.TRUETYPE_FONT, fontSize)
+		println("$screenWidth, ${textArea.font.size2D}, ${textArea.font.size}")
+		textArea.foreground = Color.WHITE
+		textArea.background = Color(0, 0, 130)
+		textArea.lineWrap = true
+		textArea.wrapStyleWord = true
+		textArea.isEditable = false
+
+		val margin = round(screenWidth.toDouble() / 100.0).toInt()
+		textArea.margin = Insets(margin, margin, margin, margin)
+		textArea.setBounds(0, 0, width, height)
+
+		val transparentCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+			Toolkit.getDefaultToolkit().createImage(""), Point(0, 0), "invisibleCursor"
+		)
+		setCursor(transparentCursor)
+
+		add(textArea)
+		setLocationRelativeTo(null)
 	}
 }
+
+var win7String: String = """
+	A problem has been detected and Windows has been shut down to prevent damage to your computer.
+	
+	PROCESS_INITIALIZATION_FAILED
+	
+	If this is the first time you've seen this Stop error screen, restart your computer, If this screen appaears again, follow these steps:
+	
+	Check to make sure any new hardware or software is properly installed. If this is a new installation, ask your hardware or software manufacturer for any Windows updates you might need.
+	
+	If problems continue, disable or remove any newly installed harware or software. Disable BIOS memory options such as caching or shadowing. If you need to use Safe Mode to remove or disable components, restart your computer, press F8 to select Advanced Startup Options, and then select Safe Mode.
+	
+	Technical information:
+	
+	*** STOP: 0x00000060 (0xF2N094c2,0x00000001,0x4FQ1ccc7,0x0000000)
+	
+	***       4FQ.sys - Address FWTV1999 base at 4s4M5000, Datestamp 4d5dd88c
+	
+	Beginning dump of physical memory
+	Physical memory dump complete
+	Contact your system administrator or technical support for further assistance.
+	""".trimIndent()
