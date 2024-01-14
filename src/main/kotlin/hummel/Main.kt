@@ -33,8 +33,16 @@ class BSOD : JFrame() {
 			override fun getCaretColor(): Color = Color(0, 0, 130)
 		}
 
-		val fontSize = round(screenWidth.toDouble() * 39.0 / 1920.0).toInt()
-		textArea.font = Font("Lucida Console", Font.TRUETYPE_FONT, fontSize)
+		val fontSize = round(screenWidth.toDouble() * 39.0 / 1920.0).toFloat()
+		var font = Font.createFont(
+			Font.TRUETYPE_FONT, BSOD::class.java.getResourceAsStream(
+				"/lucidaconsole.ttf"
+			)
+		)
+		GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font)
+		font = font.deriveFont(fontSize)
+
+		textArea.font = font
 		textArea.foreground = Color.WHITE
 		textArea.background = Color(0, 0, 130)
 		textArea.lineWrap = true
