@@ -9,7 +9,8 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Hummel009_PseudoBSOD&metric=sqale_index)](https://sonarcloud.io/summary/overall?id=Hummel009_PseudoBSOD)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Hummel009_PseudoBSOD&metric=ncloc)](https://sonarcloud.io/summary/overall?id=Hummel009_PseudoBSOD)
 
-Программа для развлечения. Выводит изображение синего экрана смерти поверх всех окон. Закрыть его невозможно (точнее можно, но лишь диспетчером задач - но наш синий экран поверх всех окон, включая диспетчер).
+Программа для развлечения. Выводит изображение синего экрана смерти поверх всех окон. Закрыть его невозможно (точнее
+можно, но лишь диспетчером задач - но наш синий экран поверх всех окон, включая диспетчер).
 
 ## Общая информация
 
