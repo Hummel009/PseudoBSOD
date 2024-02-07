@@ -1,4 +1,4 @@
-package hummel
+package com.github.hummel.bsod
 
 import java.awt.*
 import javax.swing.JFrame
