@@ -68,7 +68,7 @@ var win7String: String = """
 	
 	PROCESS_INITIALIZATION_FAILED
 	
-	If this is the first time you've seen this Stop error screen, restart your computer, If this screen appaears again, follow these steps:
+	If this is the first time you've seen this Stop error screen, restart your computer. If this screen appears again, follow these steps:
 	
 	Check to make sure any new hardware or software is properly installed. If this is a new installation, ask your hardware or software manufacturer for any Windows updates you might need.
 	
